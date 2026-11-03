@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHẦN 3: THỰC TIỄN & CHUYÊN NGÀNH IBL - HÀ</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        navy: {
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        },
+                        brand: {
+                            blue: '#2563eb',
+                            gold: '#d97706',
+                            teal: '#0d9488',
+                            bg: '#f8fafc'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f1f5f9;
+            color: #0f172a;
+            overflow: hidden;
+        }
+
+        /* Slide display control */
+        .slide {
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.98) translateY(10px);
+            transition: all 0.4s ease-out;
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1) translateY(0);
+            pointer-events: auto;
+        }
+
+        /* Clean Human Design Cards */
+        .human-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+            transition: all 0.25s ease;
+        }
+
+        .human-card:hover {
+            box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.1);
+            border-color: #cbd5e1;
+        }
+
+        /* Custom Wave Graphic */
+        .sound-wave-bar {
+            animation: bounceWave 1.2s ease-in-out infinite alternate;
+        }
+        @keyframes bounceWave {
+            0% { transform: scaleY(0.3); }
+            100% { transform: scaleY(1.1); }
+        }
+    </style>
+</head>
+<body class="h-screen w-screen relative select-none flex flex-col justify-between bg-slate-100">
+
+    <!-- Header Navigation Bar -->
+    <header class="w-full px-8 py-4 z-50 flex items-center justify-between bg-white border-b border-slate-200 shadow-sm">
+        <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-lg bg-blue-600 flex items-center justify-center font-extrabold text-white text-base shadow-md">
+                IBL
+            </div>
+            <div>
+                <h1 class="font-bold text-base text-slate-800">LUẬT THƯƠNG MẠI QUỐC TẾ</h1>
+                <p class="text-xs text-blue-600 font-semibold">PHẦN 3: THỰC TIỄN & VẬN DỤNG • BÁO CÁO VIÊN: HÀ</p>
+            </div>
+        </div>
+
+        <!-- Dynamic Dots Navigation -->
+        <div class="hidden md:flex items-center gap-3" id="slide-dots"></div>
+
+        <!-- Controls -->
+        <div class="flex items-center gap-3">
+            <button onclick="toggleFullScreen()" class="p-2.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 transition" title="Toàn màn hình">
+                <i class="fa-solid fa-expand"></i>
+            </button>
+            <div class="text-sm font-semibold text-slate-700 bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200">
+                <span id="current-slide-num" class="text-blue-600 font-bold">1</span> / <span id="total-slides-num">4</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN SLIDE CONTAINER -->
+    <main class="relative flex-1 w-full max-w-7xl mx-auto p-4 md:p-8 flex items-center justify-center overflow-hidden">
+
+        <!-- ==================== SLIDE 0: TRANG TIÊU ĐỀ ==================== -->
+        <section class="slide active w-full h-full flex flex-col justify-center items-center text-center">
+            <span class="px-4 py-1.5 rounded-full bg-blue-50 text-blue-700 font-bold text-xs tracking-wider uppercase border border-blue-200 mb-6">
+                <i class="fa-solid fa-graduation-cap mr-1"></i> Báo Cáo Chuyên Đề
+            </span>
+            
+            <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight max-w-4xl mb-6">
+                Áp Dụng Điều Ước Quốc Tế <br class="hidden md:inline">Tội Việt Nam & <span class="text-blue-600">Bài Học IBL</span>
+            </h1>
+            
+            <p class="text-slate-600 text-lg md:text-xl font-medium max-w-2xl mb-10">
+                Nghiên cứu thực tiễn thi hành và Kim chỉ nam nghề nghiệp cho Cử nhân Luật Thương mại Quốc tế.
+            </p>
+
+            <!-- Visual Preview Cards -->
+            <div class="grid grid-cols-3 gap-6 w-full max-w-3xl mb-10 text-left">
+                <div class="human-card p-5 rounded-2xl border-t-4 border-t-blue-600">
+                    <div class="text-blue-600 font-black text-2xl mb-1">01</div>
+                    <div class="font-bold text-slate-800 text-sm">Nguyên Tắc Cốt Lõi</div>
+                </div>
+                <div class="human-card p-5 rounded-2xl border-t-4 border-t-indigo-600">
+                    <div class="text-indigo-600 font-black text-2xl mb-1">02</div>
+                    <div class="font-bold text-slate-800 text-sm">Thực Tiễn SHTT</div>
+                </div>
+                <div class="human-card p-5 rounded-2xl border-t-4 border-t-amber-600">
+                    <div class="text-amber-600 font-black text-2xl mb-1">03</div>
+                    <div class="font-bold text-slate-800 text-sm">Vận Dụng IBL</div>
+                </div>
+            </div>
+
+            <button onclick="nextSlide()" class="px-8 py-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-base shadow-lg shadow-blue-600/30 hover:scale-105 transition flex items-center gap-3">
+                Bắt đầu bài trình chiếu <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </section>
+
+        <!-- ==================== SLIDE 1: NGUYÊN TẮC CỐT LÕI ==================== -->
+        <section class="slide w-full h-full flex flex-col justify-between py-2">
+            <div>
+                <span class="text-blue-600 text-xs font-extrabold uppercase tracking-widest">Nội dung 01</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-1">
+                    Nguyên Tắc Áp Dụng Luật
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 my-auto items-center">
+                
+                <!-- Left: Big Visual Principle Box -->
+                <div class="md:col-span-7 human-card p-8 rounded-3xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white shadow-xl relative overflow-hidden">
+                    <i class="fa-solid fa-scale-balanced absolute -right-6 -bottom-6 text-9xl text-white/10"></i>
+                    
+                    <span class="px-3 py-1 rounded-full bg-white/20 text-white text-xs font-bold uppercase tracking-wider">
+                        NGUYÊN TẮC VÀNG
+                    </span>
+
+                    <h3 class="text-2xl md:text-4xl font-extrabold mt-4 mb-4 leading-tight">
+                        Ưu tiên áp dụng <br><span class="text-amber-300 underline underline-offset-8">ĐIỀU ƯỚC QUỐC TẾ</span>
+                    </h3>
+
+                    <p class="text-blue-100 text-base md:text-lg font-medium">
+                        Khi có sự <strong>khác biệt</strong> giữa Luật trong nước và Điều ước quốc tế mà Việt Nam là thành viên.
+                    </p>
+                </div>
+
+                <!-- Right: Visual Hierarchy Stack -->
+                <div class="md:col-span-5 flex flex-col gap-4">
+                    
+                    <!-- Level 1: Hiến Pháp -->
+                    <div class="human-card p-5 rounded-2xl border-l-8 border-l-amber-500 bg-amber-50/50 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-amber-500 text-white flex items-center justify-center font-black text-xl shrink-0 shadow">
+                            1
+                        </div>
+                        <div>
+                            <div class="font-extrabold text-slate-900 text-lg">HIẾN PHÁP</div>
+                            <div class="text-xs font-bold text-amber-700 uppercase">Tối cao - Ngoại lệ duy nhất</div>
+                        </div>
+                    </div>
+
+                    <!-- Level 2: Điều ước quốc tế -->
+                    <div class="human-card p-5 rounded-2xl border-l-8 border-l-blue-600 bg-blue-50/50 flex items-center gap-4 shadow-md">
+                        <div class="w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center font-black text-xl shrink-0 shadow">
+                            2
+                        </div>
+                        <div>
+                            <div class="font-extrabold text-blue-900 text-lg">ĐIỀU ƯỚC QUỐC TẾ</div>
+                            <div class="text-xs font-bold text-blue-600 uppercase">Ưu tiên áp dụng</div>
+                        </div>
+                    </div>
+
+                    <!-- Level 3: Luật trong nước -->
+                    <div class="human-card p-5 rounded-2xl border-l-8 border-l-slate-400 bg-slate-50 flex items-center gap-4 opacity-80">
+                        <div class="w-12 h-12 rounded-full bg-slate-400 text-white flex items-center justify-center font-black text-xl shrink-0">
+                            3
+                        </div>
+                        <div>
+                            <div class="font-extrabold text-slate-700 text-lg">LUẬT TRONG NƯỚC</div>
+                            <div class="text-xs font-bold text-slate-500 uppercase">Bộ luật Dân sự, SHTT...</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="text-xs font-semibold text-slate-400 text-center">
+                *Căn cứ Luật Điều ước Quốc tế 2016
+            </div>
+        </section>
+
+        <!-- ==================== SLIDE 2: THỰC TIỄN (NHÃN HIỆU ÂM THANH) ==================== -->
+        <section class="slide w-full h-full flex flex-col justify-between py-2">
+            <div>
+                <span class="text-indigo-600 text-xs font-extrabold uppercase tracking-widest">Nội dung 02</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-1">
+                    Thực Tiễn: Bảo hộ Nhãn Hiệu Âm Thanh
+                </h2>
+            </div>
+
+            <!-- Timeline Flow -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-auto">
+                
+                <!-- Timeline 1 -->
+                <div class="human-card p-6 rounded-3xl flex flex-col justify-between border-t-4 border-t-rose-500">
+                    <div>
+                        <span class="px-3 py-1 rounded-full bg-rose-100 text-rose-700 text-xs font-bold">2005</span>
+                        <h3 class="text-xl font-bold text-slate-900 mt-4 mb-2">Luật SHTT 2005</h3>
+                        <div class="w-16 h-16 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center text-3xl my-4">
+                            <i class="fa-solid fa-eye"></i>
+                        </div>
+                        <p class="text-slate-600 text-sm font-medium">
+                            Chỉ bảo hộ dấu hiệu <strong class="text-rose-600">Nhìn thấy được</strong> (Logo, hình ảnh).
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 text-xs font-bold text-rose-500 flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle-xmark"></i> Từ chối âm thanh
+                    </div>
+                </div>
+
+                <!-- Timeline 2 (Interactive Sound Widget) -->
+                <div class="human-card p-6 rounded-3xl flex flex-col justify-between border-t-4 border-t-blue-600 bg-blue-50/30">
+                    <div>
+                        <span class="px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold">Cam kết</span>
+                        <h3 class="text-xl font-bold text-slate-900 mt-4 mb-2">Hiệp định EVFTA</h3>
+                        
+                        <!-- Interactive Audio Button -->
+                        <div class="my-4 p-4 rounded-2xl bg-white border border-blue-200 flex items-center justify-between shadow-sm">
+                            <button id="audio-demo-btn" onclick="playAudioDemo()" class="w-12 h-12 rounded-xl bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center text-lg transition shadow-md">
+                                <i class="fa-solid fa-play" id="audio-icon"></i>
+                            </button>
+                            <div class="text-right">
+                                <div class="text-xs font-bold text-slate-800">Bắt buộc bảo hộ</div>
+                                <div class="text-xs text-blue-600 font-bold">Nhãn hiệu Âm thanh</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-2 pt-3 border-t border-slate-100 text-xs font-bold text-blue-600 flex items-center gap-1.5">
+                        <i class="fa-solid fa-globe"></i> Động lực hội nhập
+                    </div>
+                </div>
+
+                <!-- Timeline 3 -->
+                <div class="human-card p-6 rounded-3xl flex flex-col justify-between border-t-4 border-t-emerald-500">
+                    <div>
+                        <span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold">2022</span>
+                        <h3 class="text-xl font-bold text-slate-900 mt-4 mb-2">Luật SHTT 2022</h3>
+                        <div class="w-16 h-16 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-3xl my-4">
+                            <i class="fa-solid fa-music"></i>
+                        </div>
+                        <p class="text-slate-600 text-sm font-medium">
+                            Chính thức bảo hộ <strong class="text-emerald-600">Dấu hiệu âm thanh</strong>.
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 text-xs font-bold text-emerald-600 flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle-check"></i> Nội luật hóa thành công
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Big Takeaway Box -->
+            <div class="human-card p-5 rounded-2xl bg-amber-50 border-amber-200 flex items-center gap-4">
+                <div class="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center text-lg shrink-0 shadow">
+                    <i class="fa-solid fa-lightbulb"></i>
+                </div>
+                <div class="text-slate-800 font-bold text-base md:text-lg">
+                    Thông điệp: <span class="text-amber-700">Pháp luật Quốc tế là ĐỘNG LỰC hoàn thiện Pháp luật Quốc gia.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SLIDE 3: VẬN DỤNG IBL & KẾT LUẬN ==================== -->
+        <section class="slide w-full h-full flex flex-col justify-between py-2">
+            <div>
+                <span class="text-amber-600 text-xs font-extrabold uppercase tracking-widest">Nội dung 03</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-1">
+                    Vận Dụng Trong IBL & Kết Luận
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 my-auto">
+                
+                <!-- Dispute Case Study (VN vs Germany) -->
+                <div class="md:col-span-6 human-card p-7 rounded-3xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-extrabold text-slate-900 text-xl">Xung Đột Hợp Đồng</h3>
+                            <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 font-extrabold text-xs border border-slate-200">
+                                🇻🇳 VN — 🇩🇪 ĐỨC
+                            </span>
+                        </div>
+
+                        <div class="space-y-4 my-6">
+                            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-start gap-4">
+                                <span class="w-8 h-8 rounded-xl bg-slate-800 text-white font-bold flex items-center justify-center shrink-0">1</span>
+                                <div>
+                                    <h4 class="font-bold text-slate-900 text-base">Thỏa thuận chọn luật</h4>
+                                    <p class="text-xs text-slate-500 font-medium">Tự do thỏa thuận luật áp dụng trong hợp đồng.</p>
+                                </div>
+                            </div>
+
+                            <div class="p-4 rounded-2xl bg-blue-50 border border-blue-200 flex items-start gap-4">
+                                <span class="w-8 h-8 rounded-xl bg-blue-600 text-white font-bold flex items-center justify-center shrink-0">2</span>
+                                <div>
+                                    <h4 class="font-bold text-blue-900 text-base">Công ước CISG</h4>
+                                    <p class="text-xs text-blue-700 font-medium">Tiếng nói chung giải quyết tranh chấp thương mại.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-3.5 rounded-xl bg-slate-100 text-slate-700 text-xs font-bold text-center">
+                        <i class="fa-solid fa-handshake mr-1 text-blue-600"></i> Hòa nhập: Không đối đầu, bổ trợ lẫn nhau
+                    </div>
+                </div>
+
+                <!-- Ultimate Compass Formula (GỐC & CÁNH) -->
+                <div class="md:col-span-6 flex flex-col justify-between gap-4">
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="human-card p-5 rounded-2xl bg-amber-50/60 border-amber-200">
+                            <i class="fa-solid fa-tree text-amber-600 text-2xl mb-2"></i>
+                            <h4 class="font-bold text-slate-900 text-base">Luật Quốc Gia</h4>
+                            <p class="text-xs font-semibold text-amber-700 mt-1">Nền tảng vững chắc</p>
+                        </div>
+                        <div class="human-card p-5 rounded-2xl bg-blue-50/60 border-blue-200">
+                            <i class="fa-solid fa-plane-departure text-blue-600 text-2xl mb-2"></i>
+                            <h4 class="font-bold text-slate-900 text-base">Luật Quốc Tế</h4>
+                            <p class="text-xs font-semibold text-blue-700 mt-1">Mở rộng không gian</p>
+                        </div>
+                    </div>
+
+                    <!-- Highlight Quote -->
+                    <div class="human-card p-8 rounded-3xl bg-slate-900 text-white text-center shadow-xl relative overflow-hidden">
+                        <div class="text-amber-400 font-extrabold text-xs uppercase tracking-widest mb-3">
+                            <i class="fa-solid fa-compass mr-1"></i> KIM CHỈ NAM IBL
+                        </div>
+
+                        <blockquote class="text-xl md:text-2xl font-extrabold leading-relaxed">
+                            "Nắm vững luật trong nước là <span class="text-amber-400 underline underline-offset-4">GỐC</span>
+                            <br>
+                            Làm chủ luật quốc tế là <span class="text-blue-400 underline underline-offset-4">CÁNH</span>"
+                        </blockquote>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="text-xs font-bold text-slate-400 text-center">
+                Xin chân thành cảm ơn sự theo dõi của Thầy Cô và các Bạn!
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER CONTROLS -->
+    <footer class="w-full px-8 py-4 z-50 bg-white border-t border-slate-200 flex flex-col md:flex-row items-center justify-between gap-4">
+        
+        <!-- Progress Bar -->
+        <div class="w-full md:w-1/3 bg-slate-100 h-2.5 rounded-full overflow-hidden border border-slate-200">
+            <div id="progress-bar" class="bg-blue-600 h-full w-1/4 transition-all duration-300"></div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="flex items-center gap-4">
+            <button onclick="prevSlide()" class="px-6 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold transition flex items-center gap-2 text-sm">
+                <i class="fa-solid fa-chevron-left"></i> Trở về
+            </button>
+            <button onclick="nextSlide()" class="px-7 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold shadow-md shadow-blue-600/20 hover:scale-105 transition flex items-center gap-2 text-sm">
+                Tiếp theo <i class="fa-solid fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <div class="hidden md:block text-xs font-semibold text-slate-400">
+            Dùng phím <kbd class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 border border-slate-300">←</kbd> <kbd class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 border border-slate-300">→</kbd> để chuyển trang
+        </div>
+    </footer>
+
+    <!-- SCRIPT CONTROL -->
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        // Dynamic Navigation Dots
+        const dotsContainer = document.getElementById('slide-dots');
+        slides.forEach((_, idx) => {
+            const dot = document.createElement('button');
+            dot.className = `w-3 h-3 rounded-full transition-all ${idx === 0 ? 'bg-blue-600 w-8' : 'bg-slate-300 hover:bg-slate-400'}`;
+            dot.onclick = () => goToSlide(idx);
+            dotsContainer.appendChild(dot);
+        });
+
+        document.getElementById('total-slides-num').innerText = totalSlides;
+
+        function updateSlideUI() {
+            slides.forEach((slide, idx) => {
+                slide.classList.toggle('active', idx === currentSlide);
+            });
+
+            document.getElementById('current-slide-num').innerText = currentSlide + 1;
+            const progressPercent = ((currentSlide + 1) / totalSlides) * 100;
+            document.getElementById('progress-bar').style.width = `${progressPercent}%`;
+
+            const dots = dotsContainer.children;
+            Array.from(dots).forEach((dot, idx) => {
+                dot.className = idx === currentSlide 
+                    ? 'w-8 h-3 rounded-full bg-blue-600 transition-all' 
+                    : 'w-3 h-3 rounded-full bg-slate-300 hover:bg-slate-400 transition-all';
+            });
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateSlideUI();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlideUI();
+            }
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlideUI();
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'Space') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                if (document.exitFullscreen) document.exitFullscreen();
+            }
+        }
+
+        // Web Audio Synthesizer Demo
+        let audioCtx = null;
+        let isPlaying = false;
+
+        function playAudioDemo() {
+            const btnIcon = document.getElementById('audio-icon');
+            if (isPlaying) return;
+            
+            isPlaying = true;
+            btnIcon.className = "fa-solid fa-volume-high";
+
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+
+                const now = audioCtx.currentTime;
+                
+                const osc1 = audioCtx.createOscillator();
+                const gain1 = audioCtx.createGain();
+                osc1.type = 'sine';
+                osc1.frequency.setValueAtTime(523.25, now);
+                gain1.gain.setValueAtTime(0.2, now);
+                gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+                osc1.connect(gain1);
+                gain1.connect(audioCtx.destination);
+                osc1.start(now);
+                osc1.stop(now + 0.5);
+
+                const osc2 = audioCtx.createOscillator();
+                const gain2 = audioCtx.createGain();
+                osc2.type = 'triangle';
+                osc2.frequency.setValueAtTime(659.25, now + 0.15);
+                gain2.gain.setValueAtTime(0.25, now + 0.15);
+                gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+                osc2.connect(gain2);
+                gain2.connect(audioCtx.destination);
+                osc2.start(now + 0.15);
+                osc2.stop(now + 0.8);
+
+                setTimeout(() => {
+                    btnIcon.className = "fa-solid fa-play";
+                    isPlaying = false;
+                }, 900);
+
+            } catch (e) {
+                btnIcon.className = "fa-solid fa-play";
+                isPlaying = false;
+            }
+        }
+    </script>
+</body>
+</html>
